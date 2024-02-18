@@ -4,14 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BlackJack</title>
+    <link rel="stylesheet" href="blackjack-style.css">
 </head>
 <body>
-    <div><h1>Dealer</h1></div>
-    <div><h1>You</h1></div>
+    <div id="dealer-bet">
+        <h1>Dealer</h1>
+        <div id="dealer-cards">
+            <img src="blackjackassets/DeckOfCards/10_of_clubs.png" alt="card">
+            <img src="blackjackassets/DeckOfCards/10_of_diamonds.png" alt="card">
+        </div>
+    </div>
+    <div id="your-bet">
+        <h1>You</h1>
+        <div id="your-cards">
+            <img src="blackjackassets/DeckOfCards/10_of_spades.png" alt="card">
+            <img src="blackjackassets/DeckOfCards/10_of_hearts.png" alt="card">
+        </div>
+    </div>
     <br>
     <div id="blackjack-buttons">
+        <div id="hitorstay-buttons">
         <button>Hit</button>
         <button>Stay</button>
+    </div>
     </div>
 </body>
 </html>

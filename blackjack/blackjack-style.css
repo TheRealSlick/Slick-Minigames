@@ -1,0 +1,45 @@
+body {
+    margin: auto;
+    background-color: darkolivegreen;
+}
+
+/* IDs */
+#your-bet,
+#dealer-bet {
+    text-align: center;
+    border: 1px solid black;
+    padding-bottom: 30px;
+    margin-bottom: 65px;
+
+}
+
+#your-cards,
+#dealer-cards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#blackjack-buttons {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+#blackjack-buttons button {
+    width: 10vw;
+    height: 10vh;
+}
+
+
+/* Classes */
+
+
+
+/* Images */
+img {
+    width: 10%;
+    padding-left: 15px;
+    padding-right: 15px;
+}
