@@ -1,3 +1,4 @@
+
 // Classes
 class Points{
     constructor(game_mode, pointAmount) {
@@ -17,6 +18,7 @@ class Points{
         
     }
 }
+
 
 
 // Variables

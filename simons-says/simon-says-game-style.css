@@ -1,0 +1,33 @@
+/* Body */
+body {
+    margin: auto;
+    justify-content: center;
+    text-align: center;
+    background-color:indianred
+}
+
+/* IDs */
+#simon-says-game-container {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    min-height: 100vh;
+}
+
+
+#gametiles {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border: 1px solid rgb(22, 22, 22);
+    border-radius: 15px;
+    width: 200px;
+    height: 200px;
+}
+
+/* Classes */
+.color-square {
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 10px;
+}
