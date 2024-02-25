@@ -420,11 +420,7 @@ class SimonSays {
         }
 
     }
-
-    extendBoard() {
-
-    }
-
+    
     createBoard() {
         if (this.Started == true && this.Paused == false && this.Ended == false) {
             for (const [key, value] of Object.entries(this.currentBoard)) {
