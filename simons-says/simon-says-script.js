@@ -24,6 +24,7 @@ class SimonSays {
         this.testweight = 0
         this.testcolorblue
         this.testcolorgreen
+        this.dominantColor = 0
 
         // Arrays
         this.tilesArray = []
@@ -50,6 +51,10 @@ class SimonSays {
         return Math.floor(Math.random() * (max - min) + min)
     }
 
+    returnMinimumColorRange(min, max, num) {
+        return num >= min && num <= max
+    }
+
     // Color Change Methods
     rgb(r, g, b) {
         return "rgb(" + r + "," + g + "," + b + ")";
@@ -65,12 +70,11 @@ class SimonSays {
     randomTileColor(array) {
         let randomTile = array[Math.floor(Math.random() * array.length)]
         randomTile.id = "correct-tile"
-        console.log(randomTile);
         return randomTile
     }
 
     assignTileColor() {
-        this.testweight = this.randomNumberRange(1, 4)
+        this.testweight = this.randomNumberRange(1, 1)
         this.testcolorred = this.dominantRedColor()
         this.testcolorblue = this.dominantBlueColor()
         this.testcolorgreen = this.dominantGreenColor()
@@ -79,10 +83,10 @@ class SimonSays {
 
         for (let i = 0; i < this.tilesArray.length; i++) {
             let button = this.tilesArray[i]
-            if (button.className == 'colored-button') {
+            
+            if (button.className == 'colored-button' && button.id != 'correct-tile') {
                 if (this.testweight == 1) {
                     button.style.backgroundColor = this.testcolorred
-                    console.log(this.test);
                 }
                 if (this.testweight == 2) {
                     button.style.backgroundColor = this.testcolorblue
@@ -95,20 +99,77 @@ class SimonSays {
 
     }
 
-    
-    dominantRedColor(button) {
-        var red = this.randomRGBValue(120, 255)
+
+    dominantRedColor() {
+        var red = this.randomRGBValue(180, 255)
         var green = this.randomRGBValue(0, 120)
         var blue = this.randomRGBValue(0, 120)
         var mainColor = this.rgb(red, green, blue)
         var oddColor = this.rgb(red, green, blue)
 
-        // if (button.className == 'correct-tile') {
-        //     button.style.backgroundColor = mainColor
-        // }
+        var maxSubtract
+
+        for (let i = 0; i < this.tilesArray.length; i++) {
+            const element = this.tilesArray[i]
+            if (element.id == 'correct-tile') {
+                var newColorRed = 255
+                var newColorGreen = green
+                var newColorBlue = blue
+
+                
+                // Red Logic
+
+                            
+            
+            
+                
+                // Green Logic
+                if (newColorGreen + this.easyColor > 120) {
+                    newColorGreen -= this.easyColor
+                } else if (newColorGreen - this.easyColor < 0) {
+                    newColorGreen += this.easyColor
+                } else if (newColorGreen - this.easyColor > 0) {
+                    newColorGreen -= this.easyColor
+                } else if (newColorGreen += this.easyColor < 120) {
+                    newColorGreen += this.easyColor
+                }
+        
+                // Blue Logic
+                if (newColorBlue + this.easyColor > 120) {
+                    newColorBlue -= this.easyColor
+                } else if (newColorBlue - this.easyColor < 0) {
+                    newColorBlue += this.easyColor
+                } else if (newColorBlue - this.easyColor > 0) {
+                    newColorBlue -= this.easyColor
+                } else if (newColorBlue += this.easyColor < 120) {
+                    newColorBlue += this.easyColor
+                }
+
+                console.log(green, blue);
+                console.log(newColorBlue, newColorGreen);
+                
+
+                if (newColorGreen <= 0) {
+                    
+                    newColorGreen = green + this.easyColor
+                }
+
+                if (newColorBlue <= 0) {
+                    newColorBlue = blue + this.easyColor
+                }
+
+            
+
+                element.style.backgroundColor = this.rgb(newColorRed, newColorGreen, newColorBlue)
+                console.log(element.style.backgroundColor);
+
+            } 
+            
+        }
 
         return mainColor
     }
+
 
     dominantGreenColor() {
         var red = this.randomRGBValue(0, 120)
@@ -162,9 +223,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let game = new SimonSays()
 
     game.createBoard()
-    game.dominantRedColor()
-    game.assignTileColor()
     game.randomTileColor(game.tilesArray)
+    game.assignTileColor()
+   
 
 })
 
