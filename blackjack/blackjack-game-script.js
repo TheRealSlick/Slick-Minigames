@@ -1,5 +1,7 @@
 // Arrays
 var currentDeck = []
+var playerDeck = []
+var dealerDeck = []
 
 // Bools
 var playerTurn = true
@@ -7,7 +9,7 @@ var dealerTurn = false
 var Started = false
 var Paused = false
 var Ended = false
-var Intiated = false
+var Initiated = false
 var HIT = false
 var STAY = false
 
@@ -18,6 +20,7 @@ var dealerScore = 0
 var maxPlayerScore = 21
 var maxDealerScore = 21
 var dealerStandScore = 17
+var cardValue = 0
 
 // Elements
 var hitButton = document.getElementById('hit')
@@ -45,14 +48,50 @@ function shuffleDeck(deck) {
     }
 }
 
-function deckPoints() {
-    for (let i = 0; i < currentDeck.length; i++) {
-        var card = currentDeck[i]
-        if (card.includes('')) {
-            console.log(true);
+// function deckPoints() {
+//     for (let i = 0; i < currentDeck.length; i++) {
+//         var card = currentDeck[i]
+//         if (card.includes('2')) {
+//             cardValue = 2
+//             console.log(card);
+//             console.log(true);
+//         }
+//     }
+// }
+
+function playerHit() {
+    var button = document.getElementById('hit')
+    button.addEventListener('click', () => {
+        if (playerScore < 21) {
+            dealCard()
+            if (assignDeckPoints(playerDeck) == 11) {
+                if (11 + playerScore  > 21) {
+                    assignDeckPoints(playerDeck) == 1
+                }
+            }
+            playerScore += assignDeckPoints(playerDeck)
+            console.log(playerScore);
+        }
+    })
+}
+
+function assignDeckPoints(deckArray) {
+    for (let i = 0; i < deckArray.length; i++) {
+        const card = deckArray[i];
+        var cardNumber = card.split('_')
+        var cardVal = cardNumber[0]
+    }
+
+    if (isNaN(parseInt(cardVal))) {
+        if (cardVal.includes('ace')) {
+            return 11
+        } else {
+            return 10
         }
     }
+    return parseInt(cardVal)
 }
+
 
 createDeck(currentDeck)
 shuffleDeck(currentDeck)
@@ -64,18 +103,20 @@ function dealCard() {
         var playerCards = document.getElementById('your-cards')
         for (let i = 0; i < 1; i++) {
             var playerNewCard = document.createElement("img")
-            var playerRandomCard = Math.floor(Math.random() * currentDeck.length)
+            var playerRandomCard = Math.floor(Math.random() * (currentDeck.length - 1))
             for (let j = 0; j < currentDeck.length; j++) {
                 const element = currentDeck[j];
                 if (j == playerRandomCard) {
                     card = element
+                    playerDeck.push(card)
+                    currentDeck.splice(j, 1)
                 }
             }
             playerNewCard.src = 'blackjackassets/DeckOfCards/' + card + '.png'
             playerNewCard.alt = 'card'
             playerCards.appendChild(playerNewCard)
-            console.log(playerNewCard);
         }
+
     }
 
     if (!playerTurn && dealerTurn == true) {
@@ -95,13 +136,13 @@ function dealCard() {
             console.log(dealerNewCards);
         }
     }
+
 }
 
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    dealCard()
-    deckPoints()
+    playerHit()
 })
 
 
