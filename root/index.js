@@ -1,6 +1,6 @@
 
 // Classes
-class Points{
+export class Points{
     constructor(game_mode, pointAmount) {
         // Properties
         this.game_mode = game_mode
@@ -11,13 +11,14 @@ class Points{
 
     // Methods
     awardPoints() {
-        
+        console.log('hi');
     }
 
     removePoints() {
         
     }
 }
+
 
 
 

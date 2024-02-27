@@ -1,7 +1,13 @@
+import { Points } from "../root/index.js";
+
+const e = new Points()
+e.awardPoints()
+
+
 // Arrays
-var currentDeck = []
-var playerDeck = []
-var dealerDeck = []
+const currentDeck = []
+const playerDeck = []
+const dealerDeck = []
 
 // Bools
 var playerTurn = true
@@ -17,18 +23,18 @@ var STAY = false
 var playerScore = 0
 var dealerScore = 0
 
+let card;
+let cards;
+let randomCard;
+
 var maxPlayerScore = 21
 var maxDealerScore = 21
 var dealerStandScore = 17
 var cardValue = 0
 
-// Elements
-var hitButton = document.getElementById('hit')
-var stayButton = document.getElementById('stay')
-
 // Functions
 function createDeck(deck) {
-    var deckValues = ['ace', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'king', 'queen', 'jack']
+    var deckValues = ['ace', '2', '3', '4', '5', '6', '7', '8', '9', 'king', 'queen', 'jack']
     var deckSuitType = ['of_spades', 'of_hearts', 'of_diamonds', 'of_clubs']
 
     for (let i = 0; i < deckValues.length; i++) {
@@ -48,6 +54,47 @@ function shuffleDeck(deck) {
     }
 }
 
+// function assignDeckPoints(deckArray) {
+//     for (let i = 0; i < deckArray.length; i++) {
+//         const card = deckArray[i];
+//         let cardNumber = card.split('_')
+//         var cardVal = cardNumber[0]
+//     }
+
+//     if (isNaN(parseInt(cardVal))) {
+//         if (cardVal.includes('ace')) {
+//             let val = 11
+//             return 11
+//         } else {
+//             return 10
+//         }
+//     }
+//     return parseInt(cardVal)
+// }
+
+function assignDeckPoints(deckArray) {
+    for (let i = 0; i < deckArray.length; i++) {
+        const card = deckArray[i];
+        let cardNumber = card.split('_')
+        var cardVal = cardNumber[0]
+        var holderval = cardVal
+    }
+
+    if (isNaN(parseInt(cardVal))) {
+        if (cardVal.includes('ace')) {
+            cardVal = 11
+            if (cardVal + playerScore > 21) {
+                return 1
+            } else {
+                return 11
+            }
+        } else {
+            return 10
+        }
+    }
+
+    return parseInt(cardVal)
+}
 // function deckPoints() {
 //     for (let i = 0; i < currentDeck.length; i++) {
 //         var card = currentDeck[i]
@@ -60,61 +107,58 @@ function shuffleDeck(deck) {
 // }
 
 function playerHit() {
-    var button = document.getElementById('hit')
+    let button = document.getElementById('hit')
     button.addEventListener('click', () => {
         if (playerScore < 21) {
             dealCard()
             if (assignDeckPoints(playerDeck) == 11) {
-                if (11 + playerScore  > 21) {
+                let aceHolder = assignDeckPoints(playerDeck)
+                console.log(assignDeckPoints(playerDeck));
+                console.log(aceHolder);
+                console.log(playerScore);
+                if (aceHolder + playerScore > 1) {
                     assignDeckPoints(playerDeck) == 1
+                    console.log(assignDeckPoints(playerDeck));
                 }
             }
             playerScore += assignDeckPoints(playerDeck)
             console.log(playerScore);
         }
+        if (playerScore == 21) {
+            console.log('BLACKJACK!!');
+        }
+    })
+
+}
+
+function playerStay() {
+    let button = document.getElementById('stay')
+    button.addEventListener('click', () => {
+
     })
 }
-
-function assignDeckPoints(deckArray) {
-    for (let i = 0; i < deckArray.length; i++) {
-        const card = deckArray[i];
-        var cardNumber = card.split('_')
-        var cardVal = cardNumber[0]
-    }
-
-    if (isNaN(parseInt(cardVal))) {
-        if (cardVal.includes('ace')) {
-            return 11
-        } else {
-            return 10
-        }
-    }
-    return parseInt(cardVal)
-}
-
 
 createDeck(currentDeck)
 shuffleDeck(currentDeck)
 
 
 function dealCard() {
-    var card;
-    if (playerTurn == true) {
+    if (playerTurn == true && !dealerTurn) {
         var playerCards = document.getElementById('your-cards')
         for (let i = 0; i < 1; i++) {
-            var playerNewCard = document.createElement("img")
-            var playerRandomCard = Math.floor(Math.random() * (currentDeck.length - 1))
+            cards = document.createElement("img")
+            randomCard = Math.floor(Math.random() * (currentDeck.length - 1))
             for (let j = 0; j < currentDeck.length; j++) {
                 const element = currentDeck[j];
-                if (j == playerRandomCard) {
+                if (j == randomCard) {
                     card = element
                     playerDeck.push(card)
                     currentDeck.splice(j, 1)
                 }
             }
-            playerNewCard.src = 'blackjackassets/DeckOfCards/' + card + '.png'
-            playerNewCard.alt = 'card'
-            playerCards.appendChild(playerNewCard)
+            cards.src = 'blackjackassets/DeckOfCards/' + card + '.png'
+            cards.alt = 'card'
+            playerCards.appendChild(cards)
         }
 
     }
@@ -122,18 +166,17 @@ function dealCard() {
     if (!playerTurn && dealerTurn == true) {
         var dealerCards = document.getElementById('dealer-cards')
         for (let i = 0; i < 1; i++) {
-            var dealerNewCards = document.createElement("img")
-            var dealerRandomCard = Math.floor(Math.random() * currentDeck.length)
+            cards = document.createElement("img")
+            randomCard = Math.floor(Math.random() * currentDeck.length)
             for (let j = 0; j < currentDeck.length; j++) {
                 const element = currentDeck[j];
-                if (j == dealerRandomCard) {
+                if (j == randomCard) {
                     card = element
                 }
             }
-            dealerNewCards.src = 'blackjackassets/DeckOfCards/' + card + '.png'
-            dealerNewCards.alt = 'card'
-            dealerCards.appendChild(dealerNewCards)
-            console.log(dealerNewCards);
+            cards.src = 'blackjackassets/DeckOfCards/' + card + '.png'
+            cards.alt = 'card'
+            dealerCards.appendChild(cards)
         }
     }
 
