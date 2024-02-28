@@ -5,7 +5,7 @@ export class Points{
         // Properties
         this.game_mode = game_mode
         this.pointAmount = pointAmount
-
+        this.gameStart = true
         
     }
 

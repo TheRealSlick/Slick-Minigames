@@ -14,7 +14,7 @@ body {
     text-align: center;
     border: 1px solid black;
     padding-bottom: 30px;
-    margin-bottom: 65px;
+    margin-bottom: 5px;
 
 }
 
@@ -32,10 +32,16 @@ body {
     align-items: center;
 }
 
-#blackjack-buttons button {
-    width: 10vw;
-    height: 10vh;
+
+
+#WIN-OR-LOSE {
+    text-align: center;
 }
+
+#WIN-OR-LOSE p {
+    font-size: 5em;
+}
+
 
 
 /* Classes */
@@ -55,16 +61,16 @@ p {
 /* Buttons */
 button {
     font-family: 'Casino 3D', sans-serif;
-    font-size: 3vw;
+    font-size: 2vw;
+    width: 6em;
+    height: 7vh;
     color: rgb(54, 15, 0);
-    width: 10vw;
-    height: 10vh;
 }
 
 
 /* Images */
 img {
-    width: 10%;
+    width: 7%;
     padding-left: 15px;
     padding-right: 15px;
 }
