@@ -9,11 +9,13 @@ body {
 /* IDs */
 #simon-says-game-container {
     display: flex;
-    margin: auto;
+    margin: 0 auto;
     justify-content: center;
     align-items: center;
     border: 1px solid black;
-    min-height: 100vh;
+    min-height: 90vh;
+
+
 }
 
 

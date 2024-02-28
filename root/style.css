@@ -1,6 +1,7 @@
 /* Body */
 body {
     text-align: center;
+    background-color: mediumpurple;
 }
 
 /* Headers */
@@ -21,7 +22,6 @@ p {
 }
 
 button {
-    font-size: 1vw;
     width: 10vw;
     height: 10vh;
 }

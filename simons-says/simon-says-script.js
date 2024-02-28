@@ -1,7 +1,8 @@
 class SimonSays {
     constructor() {
+
         // States
-        this.Started = true
+        this.Started = false
         this.Paused = false
         this.Ended = false
 
@@ -10,23 +11,24 @@ class SimonSays {
         this.currentLevel = 1
         this.maxLevel = 9
         this.tilesAmount = 2
+        this.timer = 60
         this.currentBoard = { board: 2 }
 
+        this.time = setInterval(() => {
+            if (this.Started == true && this.timer != 0 && this.Paused == false) {
+                let timerCounter = document.getElementById('timer')
+                this.timer -= 1
+                timerCounter.textContent = this.timer
+            } 
+        }, 1000);
 
         // Color Values
         this.easyColor = 100
-        this.mediumColor = 35
-        this.hardColor = 15
-        this.extremeColor = 10
-        this.testcolorred
         this.colorPickerWeight = 0
-        this.testcolorblue
-        this.testcolorgreen
         this.levelPicker = 2
         this.levelPickerTwo = 2
 
-        //Buttons
-        this.correctButton = document.getElementById('correct-tile')
+        // DOM
 
         // Arrays
         this.tilesArray = []
@@ -35,13 +37,30 @@ class SimonSays {
 
     }
 
+
+
     // Game Methods
     startGame() {
-
+        let startButton = document.getElementById('start')
+        startButton.addEventListener('click', () => {
+            this.Paused = false
+            if (this.Paused == false) {
+                this.Started = true
+                this.initiateGame()
+                this.time
+            }
+        })
     }
 
     pauseGame() {
-
+        let pauseButton = document.getElementById('pause')
+        pauseButton.addEventListener('click', () => {
+            if (this.Started == true) {
+                this.Started = false
+                this.Paused = true
+                clearInterval(this.time)
+            }
+        })
     }
 
     endGame() {
@@ -358,7 +377,7 @@ class SimonSays {
                 newBoard.style.width = '500px'
                 newBoard.style.height = '500px'
                 newBoard.style.setProperty('grid-template-columns', 'repeat(5,1fr)')
-                
+
                 console.log(this.easyColor);
                 this.createBoard()
                 if (this.levelPicker != 0) {
@@ -366,7 +385,7 @@ class SimonSays {
                     this.currentBoard.board -= 1
                     console.log(this.currentBoard.board);
                 }
-                
+
 
             }
             if (this.currentBoard.board == 6 && this.levelPicker == 0) {
@@ -376,7 +395,7 @@ class SimonSays {
                 newBoard.style.setProperty('grid-template-columns', 'repeat(6,1fr)')
                 this.easyColor -= 10
                 console.log(this.easyColor);
-                this.createBoard()                
+                this.createBoard()
             }
             if (this.currentBoard.board == 7) {
                 var newBoard = document.getElementById('gametiles')
@@ -420,7 +439,7 @@ class SimonSays {
         }
 
     }
-    
+
     createBoard() {
         if (this.Started == true && this.Paused == false && this.Ended == false) {
             for (const [key, value] of Object.entries(this.currentBoard)) {
@@ -445,9 +464,9 @@ class SimonSays {
                 var button = this.tilesArray[i]
                 if (button.id == "correct-tile") {
                     button.addEventListener('click', () => {
-                            console.log('clicked');
-                            this.isTile = true
-                            this.nextLevel()
+                        console.log('clicked');
+                        this.isTile = true
+                        this.nextLevel()
 
                     })
                 }
@@ -461,7 +480,8 @@ class SimonSays {
 
 document.addEventListener('DOMContentLoaded', () => {
     let game = new SimonSays()
-
+    game.startGame()
+    game.pauseGame()
     game.initiateGame()
 
 })

@@ -1,3 +1,4 @@
+// Scrapped because no time, was trying to use modules and make a points system, it's simple, but I am tired and no time!!
 import { Points } from "../root/index.js";
 
 const e = new Points()
